@@ -1,0 +1,49 @@
+   <form name="myForm" ng-submit="createOrUpdateTopic()" id="topic-form" novalidate>
+    Name:
+    <input type="text" ng-model="topic.name" name="topic[name]">
+    <input type="checkbox" ng-model="topic.is_child" name="topic[is_child]" >
+
+    <label>Color grouped by shade:
+    <select ng-model="topic.parent_value" ng-options="location.id for location in parent_values track by location.id">
+    </select>
+  </label><br/>
+    <div class="input-field">
+            <angucomplete-alt id="topics"
+              placeholder="Enter Topic..." 
+              minlength="1" 
+              selected-object="auto_id"
+              remote-url="/topics.json?q="
+              description-field="name"
+              title-field="id" />
+          </div>
+    <input type="submit" ng-disabled="!myForm.$valid" class="btn btn-primary btn-block" value="" />
+    <input type="button" ng-click="openMyDialog()"/>
+
+  </form>
+  <script type="text/ng-template" id="customer-completed-orders-filter.html">
+  <div class="heading">Number of completed orders<span class="dialog-close-btn" ng-click="closeThisDialog()">X</span></div>
+  <div class="body">
+    <form name="myForm" novalidate>
+      <div class="form-field">
+        <label>Operator</label>
+        <select class="btn btn-block" ng-model="selectedOperator" ng-init="selectedOperator = '='">
+          <option value="=">Equal To</option>
+          <option value="<">Less Than</option>
+          <option value=">">Greater Than</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Value</label>
+        <input type="number" ng-model="value" name="value" min="0" value="0" ng-init="value = 0" required />
+        <span class="field-error" ng-show="myForm.value.$error.number && myForm.value.$error.required && !myForm.value.$pristine">Valid number is required</span>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <input type="button" class="btn dialog-close-btn" ng-click="closeThisDialog()" value="Cancel" />
+  </div>
+</script>
+  <pre>topic name = "{{topic.name}}"</pre>
+  <pre>topic name = "{{topic.is_child}}"</pre>
+  <pre>topic name = "{{topic.parent_value}}"</pre>
